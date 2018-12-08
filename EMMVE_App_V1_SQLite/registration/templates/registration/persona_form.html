@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Perfil{% endblock %}
+{% block background %}{% load static %}{% static 'core/img/perfilUsuario.jpg' %}{% endblock %}
+{% block headers %}
+<h1>Perfil</h1>
+{% endblock %}
+{% block content %}
+{% comment %} <style>label{display:'rentaBasica'}</style> <!-- .errorlist{color:red;} --> {% endcomment %}
+<main role="main">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto mb-5">
+        <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+          <div class="row">
+            <!-- Previa del avatar -->
+            <div class="col-md-2">
+              {% if request.user.persona.avatar %}
+                <img src="{{request.user.persona.avatar.url}}" class="img-fluid">
+                <p class="mt-1">¿Borrar? <input type="checkbox" id="avatar-clear" name="avatar-clear" /></p>
+              {% else %}
+                <img src="{%static 'registration/img/no-avatar.jpg'%}" class="img-fluid">
+              {% endif %}
+            </div>
+            <!-- Formulario -->    
+            <div class="col-md-10">
+              <h3>Persona</h3>
+              <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+                  {{form.as_p}}            
+                <p><input type="submit" class="btn btn-primary btn-block" value="Actualizar"></p>
+              </form>  
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

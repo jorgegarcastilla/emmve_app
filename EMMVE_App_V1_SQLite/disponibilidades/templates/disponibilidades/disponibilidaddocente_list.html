@@ -1,0 +1,62 @@
+{% extends 'core/base.html' %}
+{% block title %}Disponibilidades{% endblock %}
+{% block background %}{% load static %}{% static 'core/img/disponibilidades.png' %}{% endblock %}
+{% block headers %}
+<h1>Disponibilidades</h1>
+{% endblock %}
+{% block content %}
+{% include 'disponibilidades/includes/disponibilidades_menu.html' %}
+    <main role="main">
+    <div class="container mb-4">
+        {% for disponibilidadDocente in object_list %}
+        <div class="card border-secondary mb-4" style="width: 100%;">
+            <div class="card-body">
+                <h1 class="card-title">{{disponibilidadDocente.get_diaSemana_display }}</h1>
+                <h2 class="mb-4">De: {{disponibilidadDocente.horaInicio}} - {{disponibilidadDocente.horaInicio}}</h2>
+                <h2 class="mb-4">Curso Académico: {{disponibilidadDocente.cursoAcademico}}</h2>
+            </div>        
+            <div class="container mb-4">       
+                {% if perfilUsuario == 'DOC' %}
+                    | <a href="{% url 'disponibilidades:editarDocente' disponibilidadDocente.id %}">Editar</a>
+                    | <a href="{% url 'disponibilidades:eliminarDocente' disponibilidadDocente.id %}">Eliminar</a>
+                {% endif %}
+                </p>
+            </div>
+        </div>  
+        {% endfor %}
+    </div>
+    <!-- Menú de paginación -->
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+            <li class="page-item ">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">&laquo;</a>
+            </li>
+        {% endif %}
+        {% for i in paginator.page_range %}
+            <li class="page-item {% if page_obj.number == i %}active{% endif %}">
+            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+            </li>
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <li class="page-item ">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">&raquo;</a>
+            </li>
+        {% endif %}
+        </ul>
+    </nav>
+    {% endif %}   
+    </main>
+{% endblock %}
+
+
+

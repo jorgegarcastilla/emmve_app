@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Actualizar Alumno{% endblock %}
+{% block background %}{% load static %}{% static 'core/img/alumnos.png' %}{% endblock %}
+{% block headers %}
+<h1>Alumnos</h1>
+{% endblock %}
+{% block content %}
+{% include 'alumnos/includes/alumnos_menu.html' %}
+<main role="main">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto">
+        <div>
+          {% if 'ok' in request.GET %}
+            <p style="color:green">
+              Alumno editado correctamente.
+              <a href="{% url 'alumnos:alumno' alumno.id alumno.nombre|slugify %}">Haz click aqui para ver el resultado</a>
+            </p>            
+          {% endif %}
+        <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+          {{ form.as_p }}
+          <div class="text-center">
+            <input type="submit" class="btn btn-primary btn-block" value="Actualizar Alumno" />
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

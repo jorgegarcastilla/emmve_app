@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Actualizar Docente{% endblock %}
+{{% block background %}{% load static %}{% static 'core/img/docentes.png' %}{% endblock %}
+{% block headers %}
+<h1>Docentes</h1>
+{% endblock %}
+{% block content %}
+{% include 'docentes/includes/docentes_menu.html' %}
+<main role="main">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto">
+        <div>
+          {% if 'ok' in request.GET %}
+            <p style="color:green">
+              Docente editada correctamente.
+            </p>            
+          {% endif %}
+        <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+          {{ form.as_p }}
+          <div class="text-center">
+            <input type="submit" class="btn btn-primary btn-block" value="Actualizar Docente" />
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

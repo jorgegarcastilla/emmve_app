@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}{{noticia.title}}{% endblock %}
+{% block background %}{% load static %}{% static 'core/img/noticias.jpg' %}{% endblock %}
+{% block headers %}
+<h1>Noticias</h1>
+{% endblock %}
+{% block content %}
+{% include 'noticias/includes/noticias_menu.html' %}
+<main role="main">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto">
+        <h2 class="section-heading mb-4">{{noticia.titulo}}</h2>
+        <div>
+          {{noticia.content|safe}}
+          {% if perfilUsuario == 'ADM' %}
+            <p><a href="{% url 'noticias:editar' noticia.id %}">Editar</a></p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

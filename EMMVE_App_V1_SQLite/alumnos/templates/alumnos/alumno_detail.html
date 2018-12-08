@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}{{alumno.nombre}}{% endblock %}
+{% block background %}{% load static %}{% static 'core/img/alumnos.png' %}{% endblock %}
+{% block headers %}
+<h1>Alumnos</h1>
+{% endblock %}
+{% block content %}
+{% include 'alumnos/includes/alumnos_menu.html' %}
+<main role="main">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto">
+        <h2 class="section-heading mb-4">{{alumno.nombre}}</h2>
+        <div>
+          <div class="col-md-2">
+            {% if alumno.avatar %}
+              <img src="{{alumno.avatar.url}}" class="img-fluid">
+            {% else %}
+              <img src="{%static 'alumnos/img/no-avatar.jpg'%}" class="img-fluid">
+            {% endif %}
+          </div>
+          {{alumno.nombre}}
+          {{alumno.primerApellido}}
+          {{alumno.segundoApellido}}
+          {% if perfilUsuario == 'ADM' %}
+            <p><a href="{% url 'alumnos:editar' alumno.id %}">Editar</a></p>
+          {% endif %}
+          {% if perfilUsuario == 'GES' %}
+            <p><a href="{% url 'alumnos:editarMiAlumno' alumno.id %}">Editar</a></p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

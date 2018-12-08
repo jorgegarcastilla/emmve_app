@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Crear Disponibilidad{% endblock %}
+{% block background %}{% load static %}{% static 'core/img/disponibilidades.png' %}{% endblock %}
+{% block headers %}
+<h1>Disponibilidades</h1>
+{% endblock %}
+{% block content %}
+{% include 'disponibilidades/includes/disponibilidades_menu.html' %}
+<main role="main">
+  <div class="container">
+    <div class="row mt-3 mb-3">
+      <div class="col-md-9 mx-auto">
+        <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+          {{ form.as_p }}                    
+          <div class="text-center">
+            <input type="submit" class="btn btn-primary btn-block" value="Crear Disponibilidad" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

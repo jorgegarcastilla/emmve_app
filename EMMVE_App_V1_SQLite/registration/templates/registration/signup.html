@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Registro de usuario{% endblock %}
+{% block background %}{% load static %}{% static 'core/img/login.jpg' %}{% endblock %}
+{% block headers %}
+<h1>Usuarios</h1>
+{% endblock %}
+{% block content %}
+<!-- ocultamos todos los label de los formularios-->
+<style>label{display:none}</style> <!-- .errorlist{color:red;} -->
+<main role="main">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto mb-5">
+        <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+          <h3 class="mb-4">Registro</h3>
+          <h5 class="mb-4">Datos Personales</h5>
+            {{form2.as_p}}
+          <br>
+          <h5 class="mb-4">Datos de acceso</h5>
+            {{form.as_p}}            
+          <p><input type="submit" class="btn btn-primary btn-block" value="Confirmar"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

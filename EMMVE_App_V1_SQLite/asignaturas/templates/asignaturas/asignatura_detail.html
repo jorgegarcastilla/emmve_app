@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}{{asignatura.nombre}}{% endblock %}
+{% block background %}{% load static %}{% static 'core/img/asignaturas.jpg' %}{% endblock %}
+{% block headers %}
+<h1>Asignaturas</h1>
+{% endblock %}
+{% block content %}
+{% include 'asignaturas/includes/asignaturas_menu.html' %}
+<main role="main">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto">
+        <h2 class="section-heading mb-4">{{asignatura.nombre}}</h2>
+        {{asignatura.nivel}}
+        {{asignatura.curso}}
+        {{asignatura.sesionesSemanales}}
+        {{asignatura.duracion}}
+        {{asignatura.aforoMaximo}}
+        {{asignatura.aforoMinimo}}
+        {{asignatura.edadMinima}}
+        {{asignatura.edadMaxima}}
+        <div>          
+          {% if request.user.is_staff and request.user.persona.tipoPerfil == 'ADM' %}
+            <p><a href="{% url 'asignaturas:editar' asignatura.id %}">Editar</a></p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

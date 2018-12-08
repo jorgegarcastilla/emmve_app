@@ -1,0 +1,34 @@
+{% load static %}
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<link href="{% static 'alumnos/css/custom_ckeditor.css' %}" rel="stylesheet">
+{% if perfilUsuario == 'ADM' or perfilUsuario == 'GES' %}
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <span class="navbar-brand" href="#"><i>Menu Administración</i></span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nep" aria-controls="nep" aria-expanded="false">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nep">
+        <ul class="navbar-nav mr-auto">
+          {% if perfilUsuario == 'ADM'%}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'alumnos:crear' %}"><i>Crear Alumno</i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'alumnos:alumnos' %}"><i>Listar Alumnos</i></a>
+          </li>
+          {% endif %}
+          {% if perfilUsuario == 'GES' %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'alumnos:gestionarNuevoAlumno' %}"><i>Gestionar Nuevo Alumno</i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'alumnos:misAlumnos' %}"><i>Mis Alumnos</i></a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+{% endif %}

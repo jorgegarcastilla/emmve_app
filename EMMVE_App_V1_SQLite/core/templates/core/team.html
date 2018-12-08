@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Equipo{% endblock %}
+
+{% block background %}{% load static %}{% static 'core/img/team.png' %}{% endblock %}
+
+{% block headers %}
+<h1>Equipo</h1>
+{% endblock %}
+
+{% block content %}
+    {% for docente in docentes %}
+        <div class="card border-secondary mb-4" style="width: 100%;">
+            <div class="card-body">
+                {% if docente.avatar %}
+                <div class="col-lg-2 col-md-4 offset-lg-1 ">
+                    <img class="img-fluid avatar align-self-center " src="{{docente.avatar.url}}" alt="">
+                </div>
+                {% endif %}
+                <div class="col-lg-8 col-md-6 align-self-center  ">
+                    <h4 class="section-heading">{{docente.nombre}}</h4> 
+                    <h4 class="section-heading">{{docente.primerApellido}}</h4>
+                    <h4 class="section-heading">{{docente.segundoApellido}}</h4>
+                    <br> 
+                    {% if docente.link %}
+                        <p><a href="{{docente.link}}">detalle...</a></p>
+                    {% endif %}
+                    <br>
+                </div>
+            </div>        
+            <div class="container mb-4">       
+                {% if perfilUsuario == 'ADM' %}
+                    | <a href="{% url 'docentes:docentes' %}">Editar</a>
+                {% endif %}
+                </p>
+            </div>
+        </div> 
+        <br> 
+    {% endfor %}
+{% endblock %}
